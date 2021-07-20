@@ -7,10 +7,11 @@ Thanks to contributions by wine and proton, Linux gaming has progressed much mor
 Great! Now with all the pros and cons out of the way, if you're on-board with the idea of GPU passthrough VM: **let's go**.
 
 ## My System
-CPU: AMD Ryzen 5 1600
-MoBo: ASUS Prime B350M-A
-GPU: GALAX 1660Ti
-Distro: Fedora 34 (5.12.15-300.fc34.x86_64)
+- CPU: AMD Ryzen 5 1600
+- MoBo: ASUS Prime B350M-A
+- GPU: GALAX 1660Ti
+- Host OS: Fedora 34 (5.12.15-300.fc34.x86_64)
+- Guest OS: Windows 11
 
 ## Kudos
 Thanks to [risingprismtv](https://youtu.be/3BxAaaRDEEw) for the amazing video guide on the subject and to [wendel from L1Tech](https://forum.level1techs.com/t/fedora-33-ultimiate-vfio-guide-for-2020-2021-wip/163814) for in-depth written guide.
@@ -38,7 +39,7 @@ Next, you need to edit 'kvm.conf' inside the 'hooks' folder and add your GPU IDs
 - GPU entries will start with a PCI id, eg '09:00.0'
 - according to the formatting, change the variables in 'kvm.conf' 
 
-NOTE: 
+**Note**: 
 1. If your GPU doesn't have GPU USB and SERIAL, please comment out the lines containing those variables in: 
    - '/hooks/kvm.conf'
    - 'hooks/qemu.d/win10/prepare/begin/bind_vfio.sh'
