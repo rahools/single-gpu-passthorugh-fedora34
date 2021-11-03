@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # for debugging
-# exec 19>/home/rahools/Desktop/endlogfile
+# exec 19>/home/rahools/Desktop/release.log
 # BASH_XTRACEFD=19
 # set -x
 
@@ -9,14 +9,13 @@
 source "/etc/libvirt/hooks/kvm.conf"
 
 # Unload vfio drievrs
-modprobe -r vfio_pci
-modprobe -r vfio_iommu_type1
-modprobe -r vfio
-
 echo $VIRSH_GPU_VIDEO_ID > /sys/bus/pci/devices/$VIRSH_GPU_VIDEO_ID/driver/unbind
 echo $VIRSH_GPU_AUDIO_ID > /sys/bus/pci/devices/$VIRSH_GPU_AUDIO_ID/driver/unbind
 echo $VIRSH_GPU_USB_ID > /sys/bus/pci/devices/$VIRSH_GPU_USB_ID/driver/unbind
 echo $VIRSH_GPU_SERIAL_ID > /sys/bus/pci/devices/$VIRSH_GPU_SERIAL_ID/driver/unbind
+modprobe -r vfio_pci
+modprobe -r vfio_iommu_type1
+modprobe -r vfio
 
 # re-attach gpu back to host
 virsh nodedev-reattach $VIRSH_GPU_VIDEO
@@ -40,8 +39,6 @@ modprobe nvidia
 modprobe i2c_nvidia_gpu
 modprobe drm
 
-# load drivers | open source
-# modprobe nouveau
-
 # Start display services
 systemctl start gdm.service
+systemctl --machine=rahools@.host --user stop pipewire.socket pipewire.service
