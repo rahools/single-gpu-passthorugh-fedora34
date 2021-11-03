@@ -42,6 +42,7 @@ Next, you need to edit 'kvm.conf' inside the 'hooks' folder and add your GPU IDs
 Finally, you would have to edit the hooks itself. In lines:
 - 'hooks/qemu.d/win10/prepare/begin/bind_vfio.sh:13'
 - 'hooks/qemu.d/win10/release/end/unbind_vfio.sh:44'
+
 you would have to replace 'rahools' with your own local username. This help the script connect to stop pipewire service, hence freeing up GPU audio.
 
 **Note**: 
